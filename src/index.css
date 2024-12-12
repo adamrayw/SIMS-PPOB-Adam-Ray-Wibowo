@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .card-item {
+    @apply w-20 h-20 flex flex-col items-center justify-start
+  }
+
+  .saldo {
+    background-image: url('./assets/Background Saldo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .btn-primary {
+    @apply bg-[#f42619] w-full text-white py-2 rounded-md hover:bg-[#c62014] transition-colors
+  } 
+
+  .btn-amount {
+    @apply bg-transparent text-black border border-gray-300 p-3 text-center rounded-lg hover:bg-gray-50 active:bg-gray-200 transition-colors hover:cursor-pointer
+  }
+
+  .btn-topup-disabled {
+    @apply bg-[#C6C0C0]
+  }
+
+  .color-primary {
+    @apply text-[#f42619] 
+  }
+
+  .bg-primary {
+    @apply bg-[#f42619] 
+  }
+
+  .color-primary-hover {
+    @apply hover:bg-[#c61f14] transition-colors
+  }
+
+  .input {
+    @apply w-full pl-12 pr-4 py-4 border border-gray-200 rounded-md focus:outline-none
+  }
+
+  .text-link {
+    @apply text-[#575454] font-semibold
+  }
+
+  .text-link-active {
+    @apply text-[#f42619] font-semibold
+  }
+
+  .color-secondary {
+    @apply text-[#C8C2C2]
+  }
+
+  .text-primary {
+    @apply text-[#322E2E]
+  }
+
+  .text-secondary {
+    @apply text-[#C8C2C2]
+  }
+
+  .text-header-1 {
+    @apply text-[#322E2E] text-2xl font-bold
+  }
+
+  .text-header-2 {
+    @apply text-[#322E2E] text-xl font-bold
+  }
+
+  .text-header-3 {
+    @apply text-[#322E2E] text-lg font-bold
+  }
+}
