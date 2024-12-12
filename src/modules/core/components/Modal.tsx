@@ -48,7 +48,9 @@ const Modal: React.FC<ModalProps> = ({ amount, type, title, trigger }) => {
       if (type === "LAYANAN") {
         setTitle(`Pembayaran ${state.layanan.service_name} sebesar`);
         setStatus("berhasil!");
-        dispatch(decreaseBalance(responseData?.data?.total_amount));
+        if (!Array.isArray(responseData?.data)) {
+          dispatch(decreaseBalance(responseData?.data?.total_amount || 0));
+        }
       } else {
         setStatus("Top Up berhasil!");
         setTitle("Top Up sebesar");

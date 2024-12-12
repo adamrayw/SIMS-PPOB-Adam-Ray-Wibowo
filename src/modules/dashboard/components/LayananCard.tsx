@@ -32,7 +32,7 @@ const LayananCard = () => {
         </div>
       ) : (
         <div className="flex justify-between flex-wrap">
-          {data?.data.map((item: ServiceItem) => (
+          {data?.data?.map((item: ServiceItem) => (
             <div className="card-item space-y-2 hover:cursor-pointer" onClick={() => handleLayananPage(item)}>
               <img src={item.service_icon} alt="" />
               <p className="text-center text-xs">{item.service_name}</p>
