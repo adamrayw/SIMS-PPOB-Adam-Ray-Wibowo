@@ -7,7 +7,10 @@ import { usePostQuery } from "../../../hooks/useApiRequest";
 import { Link } from "react-router";
 import { Check, X } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { decreaseBalance, updateBalance } from "../../../features/saldo/saldoSlice";
+import {
+  decreaseBalance,
+  updateBalance,
+} from "../../../features/saldo/saldoSlice";
 import { ServiceItem } from "../../../types/IService";
 import { RootState } from "../../../store";
 
@@ -22,6 +25,7 @@ const Modal: React.FC<ModalProps> = ({ amount, type, title, trigger }) => {
   const [status, setStatus] = React.useState<string>("");
   const [mainTitle, setTitle] = React.useState<string>("");
   const state = useSelector((state: RootState) => state);
+  const [jumlah, setJumlah] = React.useState<number>(amount);
 
   const dispatch = useDispatch();
 
@@ -49,6 +53,7 @@ const Modal: React.FC<ModalProps> = ({ amount, type, title, trigger }) => {
         setTitle(`Pembayaran ${state.layanan.service_name} sebesar`);
         setStatus("berhasil!");
         if (!Array.isArray(responseData?.data)) {
+          setJumlah(responseData?.data?.total_amount || 0);
           dispatch(decreaseBalance(responseData?.data?.total_amount || 0));
         }
       } else {
@@ -73,7 +78,7 @@ const Modal: React.FC<ModalProps> = ({ amount, type, title, trigger }) => {
     let data: ITopUp | ServiceItem = {} as ITopUp | ServiceItem;
 
     if (type === "LAYANAN") {
-      if(state.saldo.balance < amount) {
+      if (state.saldo.balance < amount) {
         setStatus("saldo tidak cukup");
         return;
       }
@@ -106,11 +111,12 @@ const Modal: React.FC<ModalProps> = ({ amount, type, title, trigger }) => {
         )}
         <div className="text-center space-y-1">
           <h2 className="text-secondary">{mainTitle}</h2>
-          {status === "gagal" || status === "berhasil!" ? (
-            <p className="font-bold text-2xl">Rp{numberFormat(amount)}</p>
-          ) : (
-            <p className="font-bold text-2xl">Rp{numberFormat(amount)} ?</p>
-          )}
+          {status === "gagal" ||
+            (status === "berhasil!" ? (
+              <p className="font-bold text-2xl">Rp{numberFormat(jumlah)}</p>
+            ) : (
+              <p className="font-bold text-2xl">Rp{numberFormat(amount)}</p>
+            ))}
           <p className="text-secondary">{status}</p>
         </div>
         <div className="modal-actions flex flex-col space-y-3">
